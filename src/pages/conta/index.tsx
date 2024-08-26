@@ -1,7 +1,7 @@
 import React, {useState, useEffect}  from "react";
 import {  Alert, Button, Card, Col, Modal, Row, Spinner, Table, Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faTrash, faPencil, faSync } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash, faPencil, faSync, faSortDown, faSortAmountUp, faSortUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
 import contaService from "../../services/ContaService";
 
@@ -32,6 +32,8 @@ const Conta: React.FC = () => {
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
     const [search, setSearch] = useState('');
+    const [field, setField] = useState('');
+    const [direction, setDirection] = useState('');
 
     useEffect( () => {
 
@@ -63,6 +65,10 @@ const Conta: React.FC = () => {
                 setShowSpinner(false);
             });
         }
+    }
+
+    const orderBy = (pField: string, pDirection: string) => {
+        console.log(pField, pDirection);
     }
 
 
@@ -131,7 +137,30 @@ const Conta: React.FC = () => {
                 <thead>
                     <tr>
                         <th style={{ width: '5rem' }} className="text-center">Ações</th>
-                        <th>Descrição</th>
+                        
+                        <th className="d-flex justify-content-between align-items-center">
+                            <span><a style={{ textDecoration: 'none' }} onClick={() => { setDirection( direction == 'asc' ? 'desc': 'asc' ); setField('descricao')}}  href="#">Descrição</a></span>
+                            <span className="d-flex " >
+                                {direction && (<a className="text-end me-2" href="#" onClick={()=>setDirection('')} ><FontAwesomeIcon icon={faXmark} /></a>) }
+                                {direction === 'asc' && field === 'descricao' && (<a href="#"> <FontAwesomeIcon icon={faSortAmountDown}/> </a>) }
+                                {direction === 'desc' && field === 'descricao' && (<a href="#"><FontAwesomeIcon icon={faSortAmountUp} /></a>)}
+                            </span>
+                        </th>
+
+                        {/* <th>Descrição</th> */}
+
+                        {/* <th className="d-flex justify-content-between align-items-center">
+                            
+                                <span><a style={{ textDecoration: 'none' }} href="#">Descrição</a></span>
+                                
+                                <span className="d-flex " >
+                                    <a className="text-end" href="#" ><FontAwesomeIcon icon={faXmark} /></a>
+                                    <a className="text-end ms-2" href="#" ><FontAwesomeIcon icon={faSortAmountDown} /></a>
+                                    
+
+                                </span>
+                            
+                        </th> */}
                         <th>Número Conta</th>
                         <th>Número Agencia</th>
                         <th>Número Banco</th>
