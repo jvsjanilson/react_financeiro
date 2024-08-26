@@ -5,6 +5,7 @@ import axios from "axios";
 
 interface AuthContextType {
     isAuthenticated: boolean;
+    user: string;
     login: (email: string, password: string) => void;
     logout: () => void;
 }
@@ -13,12 +14,12 @@ export const AuthContext = createContext<AuthContextType | null >(null)
 
 export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [user, setUser] = useState('')
     const navigate = useNavigate();
 
     useEffect(() => {
         const token = localStorage.getItem('token');
         const tokenJson = JSON.parse(token || '{}');
-        console.log(tokenJson);
         if (tokenJson.access) {
             setIsAuthenticated(true);
         }
@@ -32,6 +33,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
             });
             localStorage.setItem('token', JSON.stringify(response.data));
             setIsAuthenticated(true);
+            setUser(username);
             navigate('/');
         } catch (error) {
             console.error(error);
@@ -45,7 +47,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
     };
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

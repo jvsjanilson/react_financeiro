@@ -28,7 +28,7 @@ const NavigationBar: React.FC = () => {
               </Nav>
 
               <Nav className="ms-auto" >
-                <NavDropdown title="Usuario" id="basic-nav-dropdown" align="end">
+                <NavDropdown title={authContext?.user} id="basic-nav-dropdown" align="end">
                     {authContext?.isAuthenticated && <NavDropdown.Item as={Link} to="/logout" onClick={authContext.logout}>Sair</NavDropdown.Item> }
                 </NavDropdown>
               </Nav>
@@ -36,27 +36,6 @@ const NavigationBar: React.FC = () => {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        // <Navbar bg="light" expand="lg">
-        //     <Container>
-        //         <Navbar.Brand as={Link} to="/">My APP</Navbar.Brand>
-        //         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        //         <Navbar.Collapse id="basic-navbar-nav">
-        //             <Nav className="me-auto">
-        //                 <Nav.Link as={Link} to="/">Home</Nav.Link>
-                        
-        //                 <Nav.Link as={Link} to="/contatos">Contato</Nav.Link>
-        //                 <Nav.Link as={Link} to="/contas">Contas</Nav.Link>
-        //                 <Nav.Link as={Link} to="/formapagamentos">Formas de pagamento</Nav.Link>
-
-        //             </Nav>
-        //             <Nav>
-        //                 {authContext?.isAuthenticated ? (
-        //                     <Button onClick={authContext.logout}>Logout</Button>
-        //                 ): null}
-        //             </Nav>
-        //         </Navbar.Collapse>
-        //     </Container>
-        // </Navbar>
     );
 }
 

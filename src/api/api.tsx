@@ -9,11 +9,12 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(async config => {
-    const token = JSON.parse(localStorage.getItem('token') ?? '')?.access ?? '';
+    const token = localStorage.getItem('token');
+
     if (token) {
-        config.headers.Authorization = `Bearer ${token}`;
-        
+        config.headers.Authorization = `Bearer ${JSON.parse(token).access}`;
     }
+    
     return config;
 }
 );
@@ -23,6 +24,7 @@ api.interceptors.response.use(
         return response;
     },
     async (error) => {
+        console.log(error);
         if (error.response.status === 401) {
             localStorage.removeItem('token');
             window.location.href = '/login';
