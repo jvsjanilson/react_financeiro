@@ -98,7 +98,7 @@ const FormConta: React.FC = () => {
                 <span>{showMessageError}</span>
             </Alert>
 
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} noValidate>
                 <Card>
                     <Card.Header>
                         <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>

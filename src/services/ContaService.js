@@ -2,18 +2,25 @@ import api from "../api/api";
 
 class ContaService {
 
-  async getContas(search) {
-    console.log(search)
+  async getContas(search, page) {
+    let query = '';
     if (search?.length > 0) {
-      return api.get(`/contas/?search=${search}`).then((response) => {
-        return response.data.results;
-      });
+      query = `?search=${search}`;
+      if (page) {
+        query += `&${page}`;
+      }
+    } else 
+    {
+      if (page) {
+        query = `?${page}`;
+      }
     }
-    else {
-      return api.get("/contas/").then((response) => {
-          return response.data.results;
+  
+      return api.get(`/contas/${query}`).then((response) => {
+        
+        return response.data;
       });
-    }
+   
   }
 
   async getConta(id) {

@@ -1,9 +1,19 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect}  from "react";
-import {  Alert, Button, Card, Col, Modal, Row, Spinner, Table, Form } from "react-bootstrap";
+import {  Alert, Button, Card, Col, Modal, Row, Spinner, Table, Form, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash, faPencil, faSync, faSortDown, faSortAmountUp, faSortUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
 import contaService from "../../services/ContaService";
+
+interface PaginacaoDados {
+    count: number;
+    next: string;
+    previous: string;
+    results: iConta[];
+}
+
 
 interface iConta {
     id: number;
@@ -34,44 +44,57 @@ const Conta: React.FC = () => {
     const [search, setSearch] = useState('');
     const [field, setField] = useState('');
     const [direction, setDirection] = useState('');
+    const [next, setNext] = useState<string | null>(null)
+    const [previous, setPrevious] = useState<string | null>(null)
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-    useEffect( () => {
 
+    useEffect(() => {
         searchFilter();
-
-        // contaService.getContas().then( data => {
-        //     setContas(data);
-        //     setShowSpinner(false);
-        // }).catch(err => {
-        //     setShowSpinner(false);
-        // });
-        
     }, [search]);
 
+    //criar um componente de paginação
+    // const PaginationComponent: React.FC<{ currentPage: number, previous: string | null, next: string | null, onPageChange: (page: string | null) => void }> = ({ currentPage, previous, next, onPageChange }) => {
+    //     return (
+    //         <Pagination>
+    //             <Pagination.Prev onClick={() => onPageChange(previous)} disabled={!previous} />
+    //             <Pagination.Item active>{currentPage}</Pagination.Item>
+    //             <Pagination.Next onClick={() => onPageChange(next)} disabled={!next} />
+    //         </Pagination>
+    //     );
+    // }
 
-    const searchFilter = () => {
-        if (search.length > 0) {
-            contaService.getContas(search).then( data => {
-                setContas(data);
-                setShowSpinner(false);
-            }).catch(err => {
-                setShowSpinner(false);
-            });
-        } else {
-            contaService.getContas("").then( data => {
-                setContas(data);
-                setShowSpinner(false);
-            }).catch(err => {
-                setShowSpinner(false);
-            });
+    const changePage = (response: any, page: string | null = null) => {
+        setNext(response?.next?.split('?')[1]);
+        setPrevious(response?.previous?.split('?')[1]);
+        if (!response?.previous?.split('?')[1]) {
+            if (response?.previous) {
+                setPrevious('page=1');
+            }
         }
+        setCurrentPage(page?.includes('page=') ? parseInt(page.split('page=')[1]) : 1);
+    }
+
+    const searchFilter = (page: string | null = null) => {
+        setShowSpinner(true);
+        contaService.getContas(search, page).then( response => {
+            setContas(response.results);
+            changePage(response, page);
+            setShowSpinner(false);
+            
+        }).catch(err => {
+            setShowSpinner(false);
+        });
+        
+    }
+
+    const handlePageChange = (page: string | null = null) => {
+        searchFilter(page)
     }
 
     const orderBy = (pField: string, pDirection: string) => {
-        console.log(pField, pDirection);
+        console.log('todo: implementar ordenação');
     }
-
-
 
     const handleOpenModal = (conta: any) => {
         setSelected(conta);
@@ -110,27 +133,28 @@ const Conta: React.FC = () => {
                     <Row>
                         <Col sm="auto">
                             <Form.Group className="mb-3" controlId="descricao">
-                                <Link to="/contas/create" className="btn btn-primary"><FontAwesomeIcon icon={faPlus} /> Adicionar</Link>
+                                <Link to="/contas/create" className="btn btn-primary">
+                                    <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
+                                </Link>
                             </Form.Group>
-                                
                         </Col>
-                        <Col sm="auto">
-                        <Form.Group className="mb-3" controlId="descricao">
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" 
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    value={search}
-                                    placeholder="Procurar" 
-                                    aria-label="Procurar" 
-                                    aria-describedby="button-addon2"/>
-                                
-                                <Button variant="secondary" onClick={() => {}}><FontAwesomeIcon icon={faSync} /></Button>
-                            </div>
 
-                        </Form.Group>
+                        <Col sm="auto">
+                            <Form.Group className="mb-3" controlId="descricao">
+                                <div className="input-group mb-3">
+                                    <input type="text" className="form-control" 
+                                        onChange={(e) => setSearch(e.target.value)}
+                                        value={search}
+                                        placeholder="Procurar" 
+                                        aria-label="Procurar" 
+                                        aria-describedby="button-addon2"/>
+                                </div>
+
+                            </Form.Group>
                         </Col>
                         <Col>
-                            <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} animation="border" role="status"></Spinner>
+                            <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} 
+                                animation="border" role="status"/>
                         </Col>
                     </Row>
                 </caption>
@@ -139,11 +163,24 @@ const Conta: React.FC = () => {
                         <th style={{ width: '5rem' }} className="text-center">Ações</th>
                         
                         <th className="d-flex justify-content-between align-items-center">
-                            <span><a style={{ textDecoration: 'none' }} onClick={() => { setDirection( direction == 'asc' ? 'desc': 'asc' ); setField('descricao')}}  href="#">Descrição</a></span>
+                            <span>
+                                <a style={{ textDecoration: 'none' }} 
+                                    onClick={() => { 
+                                        setDirection( direction === 'asc' ? 'desc': 'asc' ); setField('descricao')
+                                        }
+                                    }  
+                                    href="#">Descrição</a>
+                            </span>
                             <span className="d-flex " >
-                                {direction && (<a className="text-end me-2" href="#" onClick={()=>setDirection('')} ><FontAwesomeIcon icon={faXmark} /></a>) }
-                                {direction === 'asc' && field === 'descricao' && (<a href="#"> <FontAwesomeIcon icon={faSortAmountDown}/> </a>) }
-                                {direction === 'desc' && field === 'descricao' && (<a href="#"><FontAwesomeIcon icon={faSortAmountUp} /></a>)}
+                                {direction && (<a className="text-end me-2" href="#" onClick={()=>setDirection('')} >
+                                    <FontAwesomeIcon icon={faXmark} /></a>) 
+                                }
+                                {direction === 'asc' && field === 'descricao' && 
+                                    (<a href="#"> <FontAwesomeIcon icon={faSortAmountDown}/> </a>) 
+                                }
+                                {direction === 'desc' && field === 'descricao' && 
+                                    (<a href="#"><FontAwesomeIcon icon={faSortAmountUp} /></a>)
+                                }
                             </span>
                         </th>
 
@@ -171,19 +208,35 @@ const Conta: React.FC = () => {
                     {contas.map((conta) => (
                         <tr key={conta.id}>
                             <td className="text-center">
-                                <Link className="text-primary" to={`/contas/${conta.id}`}><FontAwesomeIcon icon={faPencil} /></Link>
-                                <button type="button" onClick={() => handleOpenModal(conta)} className="text-danger ms-2" style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}><FontAwesomeIcon icon={faTrash}/></button>
+                                <Link className="text-primary" to={`/contas/${conta.id}`}>
+                                    <FontAwesomeIcon icon={faPencil} />
+                                </Link>
+                                <button type="button" onClick={() => handleOpenModal(conta)} 
+                                    className="text-danger ms-2" 
+                                    style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
+                                        <FontAwesomeIcon icon={faTrash}/>
+                                </button>
                             </td>
                             <td>{conta.descricao}</td>
                             <td>{conta.numero_conta}</td>
                             <td>{conta.numero_agencia}</td>
                             <td>{conta.numero_banco}</td>
-                            <td className="text-end">{  parseFloat(conta.saldo.toString()).toLocaleString('pt-BR', {currency: 'BRL', minimumFractionDigits:2})}</td>
+                            <td className="text-end">
+                                { parseFloat(conta.saldo.toString()).toLocaleString('pt-BR', 
+                                    {currency: 'BRL', minimumFractionDigits:2}
+                                    )
+                                }
+                            </td>
                         </tr>
                     ))}                           
                 </tbody>
             </Table>
                 
+            <Pagination>
+                <Pagination.Prev onClick={() => handlePageChange(previous)} disabled={!previous} />
+                <Pagination.Item active>{currentPage}</Pagination.Item>
+                <Pagination.Next onClick={() => handlePageChange(next)} disabled={!next} />
+            </Pagination>
             
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>
