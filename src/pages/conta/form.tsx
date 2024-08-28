@@ -8,11 +8,27 @@ import contaService from "../../services/ContaService";
 import { useNavigate, useParams } from "react-router-dom";
 
 interface iConta {
-    descricao: string;
-    numero_conta: string;
-    numero_agencia: string;
-    numero_banco: string;
-    saldo: number;
+  descricao: string;
+  numero_conta: string;
+  numero_agencia: string;
+  numero_banco: string;
+  saldo: number;
+}
+
+const initialConta = {
+  descricao: '',
+  numero_conta: '',
+  numero_agencia: '',
+  numero_banco: '',
+  saldo: 0
+}
+
+const initialFieldsError = {
+  descricao: [], 
+  numero_conta: [], 
+  numero_agencia: [],
+  numero_banco: [],
+  saldo: [], 
 }
 
 const FormConta: React.FC = () => {
@@ -20,22 +36,8 @@ const FormConta: React.FC = () => {
     const { id } = useParams<{id: string}>();
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
-    const [errors, setErrors] = useState(
-        {
-            descricao: [], 
-            numero_conta: [], 
-            numero_agencia: [],
-            numero_banco: [],
-            saldo: [],
-        }
-    );
-    const [conta, setConta] = useState<iConta>({
-        descricao: '',
-        numero_conta: '',
-        numero_agencia: '',
-        numero_banco: '',
-        saldo: 0
-    })
+    const [errors, setErrors] = useState(initialFieldsError);
+    const [conta, setConta] = useState<iConta>(initialConta)
 
     useEffect(() => {
         
@@ -47,7 +49,6 @@ const FormConta: React.FC = () => {
             })
         }
     }, [id])
-
 
     const handleSubmit = (e: any) => {
         e.preventDefault();
