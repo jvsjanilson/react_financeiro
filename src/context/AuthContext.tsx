@@ -35,6 +35,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
             setIsAuthenticated(true);
             setUser(username);
             navigate('/');
+            
+
         } catch (error) {
             console.error(error);
         }

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const port = 8000;
+const port = 80;
 
 export const BASE_URL = `http://localhost:${port}/api/`;
 

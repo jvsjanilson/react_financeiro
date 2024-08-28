@@ -7,6 +7,9 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Conta from "./pages/conta";
 import FormConta from "./pages/conta/form";
 import Layout from "./pages/Layout";
+import { Index as FormaPagamenoIndex } from "./pages/formapagamento";
+import { Form as FormaPagamentoForm } from "./pages/formapagamento/form";
+
 
 
 const App: React.FC = () => {
@@ -37,6 +40,24 @@ const App: React.FC = () => {
                 <Route path="/contas/:id" element={
                   <Layout>
                     <FormConta />
+                  </Layout>
+                } />
+
+              <Route path="/formapagamentos" element={
+                  <Layout>
+                    <FormaPagamenoIndex />
+                  </Layout>
+                } />
+
+              <Route path="/formapagamento/:id" element={
+                  <Layout>
+                    <FormaPagamentoForm />
+                  </Layout>
+                } />
+
+              <Route path="/formapagamento/create" element={
+                  <Layout>
+                    <FormaPagamentoForm />
                   </Layout>
                 } />
 
