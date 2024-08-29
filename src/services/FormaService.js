@@ -31,12 +31,12 @@ class FormaService {
       );
     }
   
-    async create(forma) {
-      return api.post("/formapagamentos/", forma);
+    async create(body) {
+      return api.post("/formapagamentos/", body);
     }
   
-    async update(id, forma) {
-      return api.put(`/formapagamentos/${id}/`, forma);
+    async update(id, body) {
+      return api.put(`/formapagamentos/${id}/`, body);
     }
   
     async delete(id) {
