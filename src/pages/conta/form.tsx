@@ -54,7 +54,7 @@ const FormConta: React.FC = () => {
         e.preventDefault();
 
         if (id) {
-            contaService.updateConta(id, conta).then( data => {
+            contaService.update(id, conta).then( data => {
                 navigate('/contas')
             }).catch(err => {
                 if (err.response.status === 400) {
@@ -68,7 +68,7 @@ const FormConta: React.FC = () => {
             })
             return;
         } else {
-            contaService.createConta(conta).then( data => {
+            contaService.create(conta).then( data => {
                 navigate('/contas')
             }).catch(err => {
                 if (err.response.status === 400) {

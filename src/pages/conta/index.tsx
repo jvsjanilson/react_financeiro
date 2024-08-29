@@ -77,7 +77,7 @@ const Conta: React.FC = () => {
 
     const searchFilter = (page: string | null = null) => {
         setShowSpinner(true);
-        contaService.getContas(search, page).then( response => {
+        contaService.getAll(search, page).then( response => {
             setContas(response.results);
             changePage(response, page);
             setShowSpinner(false);
@@ -108,7 +108,7 @@ const Conta: React.FC = () => {
 
     const handleDelete = (id: number) => {
          
-        contaService.deleteConta(id).then( data => {
+        contaService.delete(id).then( data => {
              const contasUpdated = contas.filter( conta => conta.id !== id);
             setContas(contasUpdated);
             setShowModal(false);
