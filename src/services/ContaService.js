@@ -2,24 +2,19 @@ import api from "../api/api";
 
 class ContaService {
 
-  async getContas(search, page) {
+  async getAll(search, page) {
     let query = '';
     if (search?.length > 0) {
       query = `?search=${search}`;
-      if (page) {
-        query += `&${page}`;
-      }
+      query += page ? `&${page}` : '';
     } else 
     {
-      if (page) {
-        query = `?${page}`;
-      }
+      query = page ? `?${page}` : '';
     }
   
-      return api.get(`/contas/${query}`).then((response) => {
-        
-        return response.data;
-      });
+    return api.get(`/contas/${query}`).then((response) => {
+      return response.data;
+    });
    
   }
 
@@ -30,15 +25,15 @@ class ContaService {
     );
   }
 
-  async createConta(conta) {
-    return api.post("/contas/", conta);
+  async create(body) {
+    return api.post("/contas/", body);
   }
 
-  async updateConta(id, conta) {
-    return api.put(`/contas/${id}/`, conta);
+  async update(id, body) {
+    return api.put(`/contas/${id}/`, body);
   }
 
-  async deleteConta(id) {
+  async delete(id) {
     return api.delete(`/contas/${id}/`);
   }
 }
