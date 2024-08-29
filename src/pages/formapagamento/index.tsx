@@ -22,7 +22,7 @@ interface iData {
     ativo: boolean;
 }
 
-const Index: React.FC = () => {
+const FormaPagamenoIndex: React.FC = () => {
     const [datas, setDatas] = useState<iData[]>([]);
     const [showModal, setShowModal] = useState(false);
     const [showSpinner, setShowSpinner] = useState(true);
@@ -103,7 +103,7 @@ const Index: React.FC = () => {
                     <Row>
                         <Col sm="auto">
                             <Form.Group className="mb-3" controlId="descricao">
-                                <Link to="/contas/create" className="btn btn-primary">
+                                <Link to="/formapagamento/create" className="btn btn-primary">
                                     <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
                                 </Link>
                             </Form.Group>
@@ -141,7 +141,7 @@ const Index: React.FC = () => {
                     {datas.map((data) => (
                         <tr key={data.id}>
                             <td className="text-center">
-                                <Link className="text-primary" to={`/contas/${data.id}`}>
+                                <Link className="text-primary" to={`/formapagamento/${data.id}`}>
                                     <FontAwesomeIcon icon={faPencil} />
                                 </Link>
                                 <button type="button" onClick={() => handleOpenModal(data)} 
@@ -188,4 +188,4 @@ const Index: React.FC = () => {
     );
 }
 
-export { Index};
+export default FormaPagamenoIndex;

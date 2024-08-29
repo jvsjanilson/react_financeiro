@@ -183,21 +183,7 @@ const Conta: React.FC = () => {
                                 }
                             </span>
                         </th>
-
-                        {/* <th>Descrição</th> */}
-
-                        {/* <th className="d-flex justify-content-between align-items-center">
-                            
-                                <span><a style={{ textDecoration: 'none' }} href="#">Descrição</a></span>
-                                
-                                <span className="d-flex " >
-                                    <a className="text-end" href="#" ><FontAwesomeIcon icon={faXmark} /></a>
-                                    <a className="text-end ms-2" href="#" ><FontAwesomeIcon icon={faSortAmountDown} /></a>
-                                    
-
-                                </span>
-                            
-                        </th> */}
+                      
                         <th>Número Conta</th>
                         <th>Número Agencia</th>
                         <th>Número Banco</th>
