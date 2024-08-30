@@ -111,7 +111,7 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="descricao">
                                         <Form.Label>Descrição</Form.Label>
-                                        <Form.Control name="descricao" value={conta.descricao} type="text" onChange={handleChange}  />
+                                        <Form.Control maxLength={60} name="descricao" value={conta.descricao} type="text" onChange={handleChange}  />
 
                                         {errors.descricao  && (
                                             <ul className="errorfield">
@@ -125,7 +125,7 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="numero_conta">
                                         <Form.Label>Número Conta</Form.Label>
-                                        <Form.Control name="numero_conta" value={conta.numero_conta} type="text" onChange={handleChange} />
+                                        <Form.Control maxLength={10} name="numero_conta" value={conta.numero_conta} type="text" onChange={handleChange} />
                                         {errors.numero_conta && (
                                             <ul className="errorfield">
                                                 {errors.numero_conta.map((error, index) => (
@@ -142,7 +142,7 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="numero_banco">
                                         <Form.Label>Número Banco</Form.Label>
-                                        <Form.Control name="numero_banco" value={conta.numero_banco} type="text" onChange={handleChange}/>
+                                        <Form.Control maxLength={3} name="numero_banco" value={conta.numero_banco} type="text" onChange={handleChange}/>
                                         {errors.numero_banco && (
                                             <ul className="errorfield">
                                                 {errors.numero_banco.map((error, index) => (
@@ -156,7 +156,7 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="numero_agencia">
                                         <Form.Label>Número Agencia</Form.Label>
-                                        <Form.Control name="numero_agencia" value={conta.numero_agencia} type="text" onChange={handleChange} />
+                                        <Form.Control maxLength={7} name="numero_agencia" value={conta.numero_agencia} type="text" onChange={handleChange} />
                                         {errors.numero_agencia && (
                                             <ul className="errorfield">
                                                 {errors.numero_agencia.map((error, index) => (
