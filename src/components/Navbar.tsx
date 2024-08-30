@@ -29,7 +29,7 @@ const NavigationBar: React.FC = () => {
 
               <Nav className="ms-auto" >
                 <NavDropdown title={authContext?.user} id="basic-nav-dropdown" align="end">
-                    {authContext?.isAuthenticated && <NavDropdown.Item as={Link} to="/logout" onClick={authContext.logout}>Sair</NavDropdown.Item> }
+                    {authContext?.isAuthenticated && <NavDropdown.Item  onClick={authContext.logout}>Sair</NavDropdown.Item> }
                 </NavDropdown>
               </Nav>
 
