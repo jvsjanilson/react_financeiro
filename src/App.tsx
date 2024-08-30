@@ -9,6 +9,7 @@ import FormConta from "./pages/conta/form";
 import Layout from "./pages/Layout";
 import FormaPagamenoIndex from "./pages/formapagamento";
 import FormPagto from "./pages/formapagamento/form";
+import NotFound from "./pages/Notfound";
 
 
 
@@ -62,7 +63,7 @@ const App: React.FC = () => {
                 } />
 
             </Route>
-            <Route path="*" element={<Login />} />
+            <Route path="*" element={<NotFound />} />
             
           </Routes>
         </AuthProvider>
