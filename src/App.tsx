@@ -10,7 +10,8 @@ import Layout from "./pages/Layout";
 import FormaPagamenoIndex from "./pages/formapagamento";
 import FormPagto from "./pages/formapagamento/form";
 import NotFound from "./pages/Notfound";
-
+import ContatoIndex from "./pages/contato";
+import ContatoForm from "./pages/contato/form";
 
 
 const App: React.FC = () => {
@@ -61,6 +62,26 @@ const App: React.FC = () => {
                     <FormPagto />
                   </Layout>
                 } />
+
+
+              <Route path="/contatos" element={
+                  <Layout>
+                    <ContatoIndex />
+                  </Layout>
+                } />
+
+              <Route path="/contato/:id" element={
+                  <Layout>
+                    <ContatoForm />
+                  </Layout>
+                } />
+
+              <Route path="/contato/create" element={
+                  <Layout>
+                    <ContatoForm />
+                  </Layout>
+                } />
+
 
             </Route>
             <Route path="*" element={<NotFound />} />
