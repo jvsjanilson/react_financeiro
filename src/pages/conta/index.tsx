@@ -8,13 +8,6 @@ import { Link } from "react-router-dom";
 import contaService from "../../services/ContaService";
 import { iConta as iData } from "../../interfaces/ContaInterface";
 
-// interface PaginacaoDados {
-//     count: number;
-//     next: string;
-//     previous: string;
-//     results: iData[];
-// }
-
 const initial = {
     id: 0,
     descricao: '',
@@ -26,7 +19,7 @@ const initial = {
 
 const Conta: React.FC = () => {
 
-    const [contas, setContas] = useState<iData[]>([]);
+    const [datas, setDatas] = useState<iData[]>([]);
     const [showModal, setShowModal] = useState(false); 
     const [showSpinner, setShowSpinner] = useState(true);
     const [selected, setSelected] = useState<iData>(initial);
@@ -69,7 +62,7 @@ const Conta: React.FC = () => {
     const searchFilter = (page: string | null = null) => {
         setShowSpinner(true);
         contaService.getAll(search, page).then( response => {
-            setContas(response.results);
+            setDatas(response.results);
             changePage(response, page);
             setShowSpinner(false);
             
@@ -83,9 +76,9 @@ const Conta: React.FC = () => {
         searchFilter(page)
     }
 
-    const orderBy = (pField: string, pDirection: string) => {
-        console.log('todo: implementar ordenação');
-    }
+    // const orderBy = (pField: string, pDirection: string) => {
+    //     console.log('todo: implementar ordenação');
+    // }
 
     const handleOpenModal = (conta: any) => {
         setSelected(conta);
@@ -100,8 +93,7 @@ const Conta: React.FC = () => {
     const handleDelete = (id: number) => {
          
         contaService.delete(id).then( data => {
-             const contasUpdated = contas.filter( conta => conta.id !== id);
-            setContas(contasUpdated);
+             setDatas(datas.filter( data => data.id !== id));
             setShowModal(false);
             
         }).catch(err => {
@@ -182,24 +174,24 @@ const Conta: React.FC = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {contas.map((conta) => (
-                        <tr key={conta.id}>
+                    {datas.map((data) => (
+                        <tr key={data.id}>
                             <td className="text-center">
-                                <Link className="text-primary" to={`/contas/${conta.id}`}>
+                                <Link className="text-primary" to={`/contas/${data.id}`}>
                                     <FontAwesomeIcon icon={faPencil} />
                                 </Link>
-                                <button type="button" onClick={() => handleOpenModal(conta)} 
+                                <button type="button" onClick={() => handleOpenModal(data)} 
                                     className="text-danger ms-2" 
                                     style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
                                         <FontAwesomeIcon icon={faTrash}/>
                                 </button>
                             </td>
-                            <td>{conta.descricao}</td>
-                            <td>{conta.numero_conta}</td>
-                            <td>{conta.numero_agencia}</td>
-                            <td>{conta.numero_banco}</td>
+                            <td>{data.descricao}</td>
+                            <td>{data.numero_conta}</td>
+                            <td>{data.numero_agencia}</td>
+                            <td>{data.numero_banco}</td>
                             <td className="text-end">
-                                { parseFloat(conta.saldo.toString()).toLocaleString('pt-BR', 
+                                { parseFloat(data.saldo.toString()).toLocaleString('pt-BR', 
                                     {currency: 'BRL', minimumFractionDigits:2}
                                     )
                                 }
