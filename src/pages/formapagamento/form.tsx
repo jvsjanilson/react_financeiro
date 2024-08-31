@@ -5,14 +5,11 @@ import { faArrowLeft, faSave } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import { useNavigate, useParams } from "react-router-dom";
 import formaService from "../../services/FormaService";
+import  { IFormaPagamento as iData }  from "../../interfaces/FormaInterface";
 
-interface iFormaPagto {
-    descricao: string;
-    codigo: string;
-    ativo: boolean;
-}
 
 const initialFormaPagto = {
+    id: 0,
     descricao: '',
     codigo: '',
     ativo: true
@@ -29,7 +26,7 @@ const FormPagto: React.FC = () => {
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
     const [errors, setErrors] = useState(initialFieldsError);
-    const [forma, setForma] = useState<iFormaPagto>(initialFormaPagto);
+    const [forma, setForma] = useState<iData>(initialFormaPagto);
     
     useEffect(() => {
         if  (id) {

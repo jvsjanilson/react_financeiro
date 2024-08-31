@@ -6,21 +6,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowLeft, faSave } from "@fortawesome/free-solid-svg-icons";
 import contaService from "../../services/ContaService";
 import { useNavigate, useParams } from "react-router-dom";
+import { iConta as iData } from "../../interfaces/ContaInterface";
 
-interface iConta {
-  descricao: string;
-  numero_conta: string;
-  numero_agencia: string;
-  numero_banco: string;
-  saldo: number;
-}
 
 const initialConta = {
-  descricao: '',
-  numero_conta: '',
-  numero_agencia: '',
-  numero_banco: '',
-  saldo: 0
+    id: 0,
+    descricao: '',
+    numero_conta: '',
+    numero_agencia: '',
+    numero_banco: '',
+    saldo: 0
 }
 
 const initialFieldsError = {
@@ -37,7 +32,7 @@ const FormConta: React.FC = () => {
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
     const [errors, setErrors] = useState(initialFieldsError);
-    const [conta, setConta] = useState<iConta>(initialConta)
+    const [conta, setConta] = useState<iData>(initialConta)
 
     useEffect(() => {
         

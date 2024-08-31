@@ -18,10 +18,10 @@ interface IContato {
     bairro: string;
     cidade: string;
     estado: string;
+    email: string;
     telefone: string;
     celular: string;
     ativo: boolean;
-    email: string;
 }
 
 const INITIAL = {
@@ -35,10 +35,10 @@ const INITIAL = {
     bairro: "",
     cidade: "",
     estado: "",
+    email: "",
     telefone: "",
     celular: "",
     ativo: true,
-    email: ""
 }
 
 
@@ -161,7 +161,8 @@ const ContatoIndex: React.FC = () => {
             <tr>
                 <th style={{ width: '5rem' }} className="text-center">Ações</th>
                 <th>Nome</th>
-                <th  style={{ width: '13rem' }}>CPF/CNPJ</th>
+                <th style={{ width: '13rem' }}>CPF/CNPJ</th>
+                <th style={{ width: '13rem' }}>Celular</th>
                 <th className="text-center" style={{ width: '5rem' }}>Ativo?</th>
 
             </tr>
@@ -181,6 +182,7 @@ const ContatoIndex: React.FC = () => {
                     </td>
                     <td>{data.nome}</td>
                     <td>{data.cpf_cnpj}</td>
+                    <td>{data.celular}</td>
                     <td className="text-center">
                         <FontAwesomeIcon className={data.ativo ? 'text-success': 'text-danger'} icon={data.ativo ? faCheck: faXmark} />
                     </td>

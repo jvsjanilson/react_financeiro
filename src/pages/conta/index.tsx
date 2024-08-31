@@ -1,28 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect}  from "react";
-import {  Alert, Button, Card, Col, Modal, Row, Spinner, Table, Form, Pagination } from "react-bootstrap";
+import { Alert, Button, Col, Modal, Row, Spinner, Table, Form, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faTrash, faPencil, faSync, faSortDown, faSortAmountUp, faSortUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash, faPencil, faSortAmountUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
 import contaService from "../../services/ContaService";
+import { iConta as iData } from "../../interfaces/ContaInterface";
 
-interface PaginacaoDados {
-    count: number;
-    next: string;
-    previous: string;
-    results: iConta[];
-}
-
-
-interface iConta {
-    id: number;
-    descricao: string;
-    numero_conta: string;
-    numero_agencia: string;
-    numero_banco: string;
-    saldo: number;
-}
+// interface PaginacaoDados {
+//     count: number;
+//     next: string;
+//     previous: string;
+//     results: iData[];
+// }
 
 const initial = {
     id: 0,
@@ -35,10 +26,10 @@ const initial = {
 
 const Conta: React.FC = () => {
 
-    const [contas, setContas] = useState<iConta[]>([]);
+    const [contas, setContas] = useState<iData[]>([]);
     const [showModal, setShowModal] = useState(false); 
     const [showSpinner, setShowSpinner] = useState(true);
-    const [selected, setSelected] = useState<iConta>(initial);
+    const [selected, setSelected] = useState<iData>(initial);
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
     const [search, setSearch] = useState('');

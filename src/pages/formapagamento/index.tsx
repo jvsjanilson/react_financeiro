@@ -6,6 +6,7 @@ import { Alert, Button, Col, Modal, Pagination, Row, Table, Form, Spinner } from
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  Link } from "react-router-dom";
 import { faCheck, faPencil, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { IFormaPagamento as iData } from "../../interfaces/FormaInterface"
 
 
 const initialState = {
@@ -15,12 +16,6 @@ const initialState = {
     ativo: true
 }
 
-interface iData {
-    id: number;
-    codigo: string;
-    descricao: string;
-    ativo: boolean;
-}
 
 const FormaPagamenoIndex: React.FC = () => {
     const [datas, setDatas] = useState<iData[]>([]);
