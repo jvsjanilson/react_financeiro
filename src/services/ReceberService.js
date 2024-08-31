@@ -11,7 +11,8 @@ class ReceberService {
                 query = page ? `?${page}` : '';
             }
         
-            return api.get(`/receber/${query}`).then((response) => {
+            return api.get(`/recebers/${query}`).then((response) => {
+                    console.log(response.data);
                     return response.data;
                 }
             );
@@ -19,22 +20,22 @@ class ReceberService {
         }
         
         async get(id) {
-            return api.get(`/receber/${id}/`).then((response) => {
+            return api.get(`/recebers/${id}/`).then((response) => {
                     return response.data
                 }
             );
         }
         
         async create(body) {
-            return api.post("/receber/", body);
+            return api.post("/recebers/", body);
         }
         
         async update(id, body) {
-            return api.put(`/receber/${id}/`, body);
+            return api.put(`/recebers/${id}/`, body);
         }
         
         async delete(id) {
-            return api.delete(`/receber/${id}/`);
+            return api.delete(`/recebers/${id}/`);
         }
 }
 
