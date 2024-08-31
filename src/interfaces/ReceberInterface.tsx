@@ -11,4 +11,7 @@ export interface iReceber {
     conta: number;
     formapagamento: number;
     ativo: boolean;
+    conta_numero: string;
+    contato_nome: string;
+    formapagamento_descricao: string;
 }
