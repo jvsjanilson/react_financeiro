@@ -23,7 +23,7 @@ const NavigationBar: React.FC = () => {
 
                 <NavDropdown title="Finaneiro" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/contapagar">Contas a pagar</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/contareceber">Contas a receber</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/recebers">Contas a receber</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
 
