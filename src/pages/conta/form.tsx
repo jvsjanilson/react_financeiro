@@ -37,7 +37,7 @@ const FormConta: React.FC = () => {
     useEffect(() => {
         
         if (id) {
-            contaService.getConta(id).then( data => {
+            contaService.get(id).then( data => {
                 setConta(data)
             }).catch(err => {
                 navigate('/contas');
