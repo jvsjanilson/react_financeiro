@@ -12,6 +12,8 @@ import FormPagto from "./pages/formapagamento/form";
 import NotFound from "./pages/Notfound";
 import ContatoIndex from "./pages/contato";
 import ContatoForm from "./pages/contato/form";
+import ReceberIndex from "./pages/receber";
+import ReceberForm from "./pages/receber/form";
 
 
 const App: React.FC = () => {
@@ -82,6 +84,24 @@ const App: React.FC = () => {
                   </Layout>
                 } />
 
+
+              <Route path="/recebers" element={
+                  <Layout>
+                    <ReceberIndex />
+                  </Layout>
+                } />
+
+              <Route path="/receber/:id" element={
+                  <Layout>
+                    <ReceberForm />
+                  </Layout>
+                } />
+
+              <Route path="/receber/create" element={
+                  <Layout>
+                    <ReceberForm />
+                  </Layout>
+                } />
 
             </Route>
             <Route path="*" element={<NotFound />} />
