@@ -6,23 +6,7 @@ import contatoService from "../../services/ContatoService";
 import { Form, Alert, Button, Col, Modal, Pagination, Row, Table, Spinner } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPencil, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
-
-interface IContato {
-    id: number;
-    nome: string;
-    cpf_cnpj: string;
-    endereco: string;
-    numero: string;
-    cep: string;
-    complemento: string;    
-    bairro: string;
-    cidade: string;
-    estado: string;
-    email: string;
-    telefone: string;
-    celular: string;
-    ativo: boolean;
-}
+import { IContato as iData } from "../../interfaces/ContatoInterface";
 
 const INITIAL = {
     id: 0,
@@ -41,14 +25,12 @@ const INITIAL = {
     ativo: true,
 }
 
-
-
 const ContatoIndex: React.FC = () => {
 
-    const [datas, setDatas] = useState<IContato[]>([]);
+    const [datas, setDatas] = useState<iData[]>([]);
     const [showModal, setShowModal] = useState(false); 
     const [showSpinner, setShowSpinner] = useState(true);
-    const [selected, setSelected] = useState<IContato>(INITIAL);
+    const [selected, setSelected] = useState<iData>(INITIAL);
     const [showError, setShowError] = useState(false);
     const [showMessageError, setShowMessageError] = useState('');
     const [search, setSearch] = useState('');
