@@ -25,6 +25,7 @@ const INITIAL = {
     ativo: true,
 }
 
+
 const ContatoIndex: React.FC = () => {
 
     const [datas, setDatas] = useState<iData[]>([]);
@@ -114,7 +115,7 @@ const ContatoIndex: React.FC = () => {
             <Row>
                 <Col sm="auto">
                     <Form.Group className="mb-3" controlId="descricao">
-                        <Link to="/formapagamento/create" className="btn btn-primary">
+                        <Link to="/contato/create" className="btn btn-primary">
                             <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
                         </Link>
                     </Form.Group>
