@@ -18,7 +18,7 @@ class ContaService {
    
   }
 
-  async getConta(id) {
+  async get(id) {
     return api.get(`/contas/${id}/`).then((response) => {
       return response.data
     }
