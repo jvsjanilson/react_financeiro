@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Alert, Button, Col, Modal, Row, Spinner, Table, Form, Pagination } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faPlus, faTrash, faPencil, faSortAmountUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faPlus, faTrash, faPencil, faSortAmountUp, faSortAmountDown, faXmark, faUndo, faMoneyBill } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
 import receberService from "../../services/ReceberService";
 import { iReceber as iData } from "../../interfaces/ReceberInterface";
@@ -138,7 +138,7 @@ const ReceberIndex: React.FC = () => {
                 </caption>
                 <thead>
                     <tr>
-                        <th style={{ width: '5rem' }} className="text-center">Ações</th>
+                        <th style={{ width: '6rem' }} className="text-center">Ações</th>
                         <th style={{ width: '10rem' }}>Documento</th>
                         <th>Nome Contato</th>
                         <th>Forma Pagto</th>
@@ -154,14 +154,33 @@ const ReceberIndex: React.FC = () => {
                     {datas.map((data) => (
                         <tr key={data.id}>
                             <td className="text-center">
-                                <Link className="text-primary" to={`/formapagamento/${data.id}`}>
-                                    <FontAwesomeIcon icon={faPencil} />
-                                </Link>
-                                <button type="button" onClick={() => handleOpenModal(data)} 
-                                    className="text-danger ms-2" 
-                                    style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faTrash}/>
-                                </button>
+                                {data.status === "A" && (
+                                    
+                                <>
+                                    <Link className="text-primary" to={`/formapagamento/${data.id}`}>
+                                        <FontAwesomeIcon icon={faPencil} />
+                                    </Link>
+                                    <button type="button" onClick={() => handleOpenModal(data)} 
+                                        className="text-danger ms-2" 
+                                        style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
+                                            <FontAwesomeIcon icon={faTrash}/>
+                                    </button>
+
+                                    <Link className="text-success ms-2" to={`/receber/baixar/${data.id}`}>
+                                        <FontAwesomeIcon icon={faMoneyBill} />
+                                    </Link>
+                                </>
+                                    
+                                )}
+                                {data.status === "P" && (
+                                    <>
+                                        <Link className="text-primary" to={`/receber/estornar/${data.id}`}>
+                                            <FontAwesomeIcon icon={faUndo} />
+                                        </Link>
+                                    </>
+                                )}
+
+                                
                             </td>
                             <td>{data.documento}</td>
                             <td>{data.contato_nome}</td>

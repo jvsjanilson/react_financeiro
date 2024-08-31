@@ -14,6 +14,8 @@ import ContatoIndex from "./pages/contato";
 import ContatoForm from "./pages/contato/form";
 import ReceberIndex from "./pages/receber";
 import ReceberForm from "./pages/receber/form";
+import FormBaixa from "./pages/receber/baixa";
+import FormEstorno from "./pages/receber/estorno";
 
 
 const App: React.FC = () => {
@@ -102,6 +104,20 @@ const App: React.FC = () => {
                     <ReceberForm />
                   </Layout>
                 } />
+
+              <Route path="/receber/baixar/:id" element={
+                  <Layout>
+                    <FormBaixa />
+                  </Layout>
+                } />
+
+              <Route path="/receber/estornar/:id" element={
+                  <Layout>
+                    <FormEstorno />
+                  </Layout>
+                } />
+
+
 
             </Route>
             <Route path="*" element={<NotFound />} />
