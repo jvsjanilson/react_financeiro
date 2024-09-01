@@ -29,14 +29,6 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
             }).catch((error) => {
                 navigate('/login');
             });
-
-            
-            api.get('contas/?all=true').then((response) => {
-                console.log(response.data);
-            }).catch((error) => {
-                console.error(error);
-            });
-
         }
     }, []);
 
