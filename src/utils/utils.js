@@ -1,15 +1,12 @@
+import { format, parseISO } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
+
 function formatDate(dataString) {
     if (!dataString) return "";
     
-    const date = new Date(dataString);
-
-    if (isNaN(date.getTime())) return "";
-
-    return new Intl.DateTimeFormat("pt-BR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
-    }).format(date);
+    const date = parseISO(dataString);
+    return format(date, "dd/MM/yyyy", { locale: ptBR });    
+   
 }
 
 function formatMoeda (valor, decimal = 2)  {
