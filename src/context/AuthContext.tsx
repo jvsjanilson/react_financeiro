@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "../api/api";
+import api from "../api/api";
 
 interface AuthContextType {
     isAuthenticated: boolean;
@@ -21,7 +22,21 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
         const token = localStorage.getItem('token');
         const tokenJson = JSON.parse(token || '{}');
         if (tokenJson.access) {
-            setIsAuthenticated(true);
+            api.get('user/me/').then((response) => {
+                setIsAuthenticated(true);
+                setUser(response.data.username);
+                navigate('/');
+            }).catch((error) => {
+                navigate('/login');
+            });
+
+            
+            api.get('contas/?all=true').then((response) => {
+                console.log(response.data);
+            }).catch((error) => {
+                console.error(error);
+            });
+
         }
     }, []);
 
@@ -38,7 +53,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }
             
 
         } catch (error) {
-            console.error(error);
+            navigate('/login');
         }
     };
 
