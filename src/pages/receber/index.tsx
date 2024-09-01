@@ -111,7 +111,7 @@ const ReceberIndex: React.FC = () => {
                     <Row>
                         <Col sm="auto">
                             <Form.Group className="mb-3" controlId="descricao">
-                                <Link to="/formapagamento/create" className="btn btn-primary">
+                                <Link to="/receber/create" className="btn btn-primary">
                                     <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
                                 </Link>
                             </Form.Group>
@@ -157,7 +157,7 @@ const ReceberIndex: React.FC = () => {
                                 {data.status === "A" && (
                                     
                                 <>
-                                    <Link className="text-primary" to={`/formapagamento/${data.id}`}>
+                                    <Link className="text-primary" to={`/receber/${data.id}`}>
                                         <FontAwesomeIcon icon={faPencil} />
                                     </Link>
                                     <button type="button" onClick={() => handleOpenModal(data)} 
@@ -189,7 +189,7 @@ const ReceberIndex: React.FC = () => {
                             <td>{formatDate(data.data_vencimento)}</td>
                             <td>{formatDate(data.data_pagamento)}</td>
                             <td  className="text-end">{formatMoeda(data.valor)}</td>
-                            <td>{data.status}</td>
+                            <td>{data.status === 'P' ? 'Pago': 'Aberto'}</td>
 
                             
                         </tr>

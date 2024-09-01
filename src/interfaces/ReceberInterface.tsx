@@ -3,7 +3,7 @@ export interface iReceber {
     documento: string;
     data_emissao: string;
     data_vencimento: string;
-    data_pagamento: string;
+    data_pagamento: string | null;
     valor: number;
     status: string;
     observacao: string;

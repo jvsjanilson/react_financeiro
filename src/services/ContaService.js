@@ -18,6 +18,12 @@ class ContaService {
    
   }
 
+  async getAllContas() {
+    return api.get("/contas/?all=true").then((response) => {
+      return response.data;
+    });
+  }
+
   async get(id) {
     return api.get(`/contas/${id}/`).then((response) => {
       return response.data

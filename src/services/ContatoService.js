@@ -17,6 +17,14 @@ class ContatoService {
         );
      
     }
+
+    async getAllContatos() {
+        return api.get(`/contatos/?all=true`).then((response) => {
+                return response.data;
+            }
+        );
+     
+    }
     
     async get(id) {
         return api.get(`/contatos/${id}/`).then((response) => {

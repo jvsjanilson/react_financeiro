@@ -24,6 +24,12 @@ class FormaService {
       
     }
   
+    async getAllFormaPagamentos() {
+      return api.get(`/formapagamentos/?all=true`).then((response) => {
+        return response.data;
+      });
+    }
+
     async get(id) {
       return api.get(`/formapagamentos/${id}/`).then((response) => {
         return response.data
