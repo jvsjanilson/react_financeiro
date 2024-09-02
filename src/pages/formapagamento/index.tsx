@@ -139,7 +139,7 @@ const FormaPagamenoIndex: React.FC = () => {
 
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody className="table-group-divider">
                             {datas.map((data) => (
                                 <tr key={data.id}>
                                     <td className="text-center">

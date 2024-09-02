@@ -181,7 +181,7 @@ const Conta: React.FC = () => {
                             <th className="text-end">Saldo</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="table-group-divider">
                         {datas.map((data) => (
                             <tr key={data.id}>
                                 <td className="text-center">

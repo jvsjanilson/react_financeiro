@@ -59,9 +59,9 @@ const FormBaixa: React.FC = () => {
         <div className="container d-flex justify-content-center mt-4">
 
             <Form onSubmit={formSubmit}>
-                <Card className="p-1">
+                <Card >
                     <Card.Header>
-                        <h4>Baixa de título a receber</h4>
+                        <Card.Title className="text-center">Baixa de título a receber</Card.Title>
                     </Card.Header>
                     <Card.Body>
                         <div className="row">
