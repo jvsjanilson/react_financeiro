@@ -47,7 +47,7 @@ const FormEstorno: React.FC = () => {
             <Form onSubmit={handleSubmit}>
             <Card className="p-1">
                     <Card.Header>
-                        <h4>Estornar de título a receber</h4>
+                        <Card.Title className="text-center">Estorno de título a receber</Card.Title>
                     </Card.Header>
                     <Card.Body>
                         <div className="row">
