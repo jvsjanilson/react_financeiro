@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, {useState, useEffect}  from "react";
-import { Alert, Button, Col, Modal, Row, Spinner, Table, Form, Pagination } from "react-bootstrap";
+import { Alert, Button, Col, Modal, Row, Spinner, Table, Form, Pagination, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash, faPencil, faSortAmountUp, faSortAmountDown, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
@@ -97,7 +97,9 @@ const Conta: React.FC = () => {
             setShowModal(false);
             
         }).catch(err => {
-            if (err.response.status === 403) {
+            const error400 = [403,400]
+
+            if (error400.includes(err.response.status)) {
                 setShowModal(false);
                 setShowError(true)
                 setShowMessageError(err.response.data.detail)
@@ -111,101 +113,113 @@ const Conta: React.FC = () => {
                 <span>{showMessageError}</span>
             </Alert>
                
-            <Table striped bordered hover className="caption-top">
-                <caption style={{paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
-                    <Row>
-                        <Col sm="auto">
-                            <Form.Group className="mb-3" controlId="descricao">
-                                <Link to="/contas/create" className="btn btn-primary">
-                                    <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
-                                </Link>
-                            </Form.Group>
-                        </Col>
 
-                        <Col sm="auto">
-                            <Form.Group className="mb-3" controlId="descricao">
-                                <div className="input-group mb-3">
-                                    <input type="text" className="form-control" 
-                                        onChange={(e) => setSearch(e.target.value)}
-                                        value={search}
-                                        placeholder="Procurar" 
-                                        aria-label="Procurar" 
-                                        aria-describedby="button-addon2"/>
-                                </div>
+        <Card>
+            <Card.Header>
+            <Card.Title className="text-center">Lista de Contas</Card.Title>
+            </Card.Header>
+            <Card.Body>
+                <Table striped bordered hover className="caption-top">
+                <caption style={{padding: '0', margin: '0'}}>
+                        <Row>
+                            <Col sm="auto">
+                                <Form.Group className="mb-3" controlId="descricao">
+                                    <Link to="/contas/create" title="Adicionar" className="btn btn-primary rounded-pill">
+                                        <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> 
+                                    </Link>
+                                </Form.Group>
+                            </Col>
 
-                            </Form.Group>
-                        </Col>
-                        <Col>
-                            <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} 
-                                animation="border" role="status"/>
-                        </Col>
-                    </Row>
-                </caption>
-                <thead>
-                    <tr>
-                        <th style={{ width: '5rem' }} className="text-center">Ações</th>
+                            <Col sm="4">
+                                <Form.Group className="mb-3" controlId="descricao">
+                                    <div className="input-group mb-3">
+                                        <input type="search" className="form-control" 
+                                            onChange={(e) => setSearch(e.target.value)}
+                                            value={search}
+                                            placeholder="Procurar" 
+                                            aria-label="Procurar" 
+                                            aria-describedby="button-addon2"/>
+                                    </div>
+
+                                </Form.Group>
+                            </Col>
+                            <Col>
+                                <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} 
+                                    animation="border" role="status"/>
+                            </Col>
+                        </Row>
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th style={{ width: '5rem' }} className="text-center">Ações</th>
+                            
+                            <th className="d-flex justify-content-between align-items-center">
+                                <span>
+                                    <a style={{ textDecoration: 'none' }} 
+                                        onClick={() => { 
+                                            setDirection( direction === 'asc' ? 'desc': 'asc' ); setField('descricao')
+                                            }
+                                        }  
+                                        href="#">Descrição</a>
+                                </span>
+                                <span className="d-flex " >
+                                    {direction && (<a className="text-end me-2" href="#" onClick={()=>setDirection('')} >
+                                        <FontAwesomeIcon icon={faXmark} /></a>) 
+                                    }
+                                    {direction === 'asc' && field === 'descricao' && 
+                                        (<a href="#"> <FontAwesomeIcon icon={faSortAmountDown}/> </a>) 
+                                    }
+                                    {direction === 'desc' && field === 'descricao' && 
+                                        (<a href="#"><FontAwesomeIcon icon={faSortAmountUp} /></a>)
+                                    }
+                                </span>
+                            </th>
                         
-                        <th className="d-flex justify-content-between align-items-center">
-                            <span>
-                                <a style={{ textDecoration: 'none' }} 
-                                    onClick={() => { 
-                                        setDirection( direction === 'asc' ? 'desc': 'asc' ); setField('descricao')
-                                        }
-                                    }  
-                                    href="#">Descrição</a>
-                            </span>
-                            <span className="d-flex " >
-                                {direction && (<a className="text-end me-2" href="#" onClick={()=>setDirection('')} >
-                                    <FontAwesomeIcon icon={faXmark} /></a>) 
-                                }
-                                {direction === 'asc' && field === 'descricao' && 
-                                    (<a href="#"> <FontAwesomeIcon icon={faSortAmountDown}/> </a>) 
-                                }
-                                {direction === 'desc' && field === 'descricao' && 
-                                    (<a href="#"><FontAwesomeIcon icon={faSortAmountUp} /></a>)
-                                }
-                            </span>
-                        </th>
-                      
-                        <th>Número Conta</th>
-                        <th>Número Agencia</th>
-                        <th>Número Banco</th>
-                        <th className="text-end">Saldo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {datas.map((data) => (
-                        <tr key={data.id}>
-                            <td className="text-center">
-                                <Link className="text-primary" to={`/contas/${data.id}`}>
-                                    <FontAwesomeIcon icon={faPencil} />
-                                </Link>
-                                <button type="button" onClick={() => handleOpenModal(data)} 
-                                    className="text-danger ms-2" 
-                                    style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
-                                        <FontAwesomeIcon icon={faTrash}/>
-                                </button>
-                            </td>
-                            <td>{data.descricao}</td>
-                            <td>{data.numero_conta}</td>
-                            <td>{data.numero_agencia}</td>
-                            <td>{data.numero_banco}</td>
-                            <td className="text-end">
-                                { parseFloat(data.saldo.toString()).toLocaleString('pt-BR', 
-                                    {currency: 'BRL', minimumFractionDigits:2}
-                                    )
-                                }
-                            </td>
+                            <th>Número Conta</th>
+                            <th>Número Agencia</th>
+                            <th>Número Banco</th>
+                            <th className="text-end">Saldo</th>
                         </tr>
-                    ))}                           
-                </tbody>
-            </Table>
+                    </thead>
+                    <tbody>
+                        {datas.map((data) => (
+                            <tr key={data.id}>
+                                <td className="text-center">
+                                    <Link className="text-primary" to={`/contas/${data.id}`}>
+                                        <FontAwesomeIcon icon={faPencil} />
+                                    </Link>
+                                    <button type="button" onClick={() => handleOpenModal(data)} 
+                                        className="text-danger ms-2" 
+                                        style={{ border: 'none', background: 'none', padding: '0', cursor: 'pointer' }}>
+                                            <FontAwesomeIcon icon={faTrash}/>
+                                    </button>
+                                </td>
+                                <td>{data.descricao}</td>
+                                <td>{data.numero_conta}</td>
+                                <td>{data.numero_agencia}</td>
+                                <td>{data.numero_banco}</td>
+                                <td className="text-end">
+                                    { parseFloat(data.saldo.toString()).toLocaleString('pt-BR', 
+                                        {currency: 'BRL', minimumFractionDigits:2}
+                                        )
+                                    }
+                                </td>
+                            </tr>
+                        ))}                           
+                    </tbody>
+                </Table>
+                    
+                <Pagination>
+                    <Pagination.Prev onClick={() => handlePageChange(previous)} disabled={!previous} />
+                    <Pagination.Item active>{currentPage}</Pagination.Item>
+                    <Pagination.Next onClick={() => handlePageChange(next)} disabled={!next} />
+                </Pagination>
                 
-            <Pagination>
-                <Pagination.Prev onClick={() => handlePageChange(previous)} disabled={!previous} />
-                <Pagination.Item active>{currentPage}</Pagination.Item>
-                <Pagination.Next onClick={() => handlePageChange(next)} disabled={!next} />
-            </Pagination>
+            </Card.Body>
+
+
+        </Card>
+
             
             <Modal show={showModal} onHide={handleCloseModal}>
                 <Modal.Header closeButton>

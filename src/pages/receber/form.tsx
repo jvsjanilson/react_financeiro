@@ -136,13 +136,12 @@ const ReceberForm: React.FC = () => {
       <Form onSubmit={handleSubmit} noValidate>
           <Card>
               <Card.Header>
-                  <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>
-                  <Link to="/recebers" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                <Card.Title className="text-center">Formulário de Conta a receber</Card.Title>
               </Card.Header>
 
               <Card.Body>
                 <Row>
-                    <Col md>
+                    <Col md={2}>
                         <Form.Group className="mb-3" controlId="documento">
                             <Form.Label>Documento</Form.Label>
                             <Form.Control name="documento" value={data.documento } autoFocus
@@ -156,7 +155,7 @@ const ReceberForm: React.FC = () => {
                             )}
                         </Form.Group>
                     </Col>
-                    <Col md>
+                    <Col md={2}>
                         <Form.Group className="mb-3" controlId="data_emissao">
                             <Form.Label>Data Emissao</Form.Label>
                             <Form.Control name="data_emissao" value={data.data_emissao} 
@@ -170,7 +169,7 @@ const ReceberForm: React.FC = () => {
                             )}
                         </Form.Group>
                     </Col>
-                    <Col md>
+                    <Col md={2}>
                         <Form.Group className="mb-3" controlId="data_vencimento">
                             <Form.Label>Data Vencimento</Form.Label>
                             <Form.Control name="data_vencimento" value={data.data_vencimento} 
@@ -184,10 +183,28 @@ const ReceberForm: React.FC = () => {
                             )}
                         </Form.Group>
                     </Col>
+
+                    <Col md>
+                        <Form.Group className="mb-3" controlId="contato">
+                            <Form.Label>Contatos</Form.Label>
+                            <Form.Select name="contato" value={data.contato}  onChange={handleChange}>
+                                {contatos.map((contato: IContato) => (
+                                    <option key={contato.id} value={contato.id}>{contato.nome}</option>
+                                ))}
+                            </Form.Select>
+                            {errors.contato && (
+                                <ul className="errorfield">
+                                    {errors.contato.map((error, index) => (
+                                        <li key={index} className="text-danger">{error}</li>
+                                    ))}
+                                </ul>
+                            )}
+                        </Form.Group>
+                    </Col>
                 </Row>
 
                 <Row>
-                  <Col md={3}>
+                  <Col md>
                         <Form.Group className="mb-3" controlId="conta">
                             <Form.Label>Conta</Form.Label>
                             <Form.Select name="conta" value={data.conta}  onChange={handleChange}>
@@ -205,7 +222,7 @@ const ReceberForm: React.FC = () => {
                         </Form.Group>
                     </Col>
 
-                    <Col md={3}>
+                    <Col md>
                         <Form.Group className="mb-3" controlId="formapagamento">
                             <Form.Label>Forma de Pagamento</Form.Label>
                             <Form.Select name="formapagamento" value={data.formapagamento}  onChange={handleChange}>
@@ -223,25 +240,9 @@ const ReceberForm: React.FC = () => {
                         </Form.Group>
                     </Col>
 
-                    <Col md={4}>
-                        <Form.Group className="mb-3" controlId="contato">
-                            <Form.Label>Contatos</Form.Label>
-                            <Form.Select name="contato" value={data.contato}  onChange={handleChange}>
-                                {contatos.map((contato: IContato) => (
-                                    <option key={contato.id} value={contato.id}>{contato.nome}</option>
-                                ))}
-                            </Form.Select>
-                            {errors.contato && (
-                                <ul className="errorfield">
-                                    {errors.contato.map((error, index) => (
-                                        <li key={index} className="text-danger">{error}</li>
-                                    ))}
-                                </ul>
-                            )}
-                        </Form.Group>
-                    </Col>
+                   
 
-                    <Col md>
+                    <Col md={2}>
                         <Form.Group className="mb-3" controlId="valor">
                             <Form.Label>Valor</Form.Label>
                             <Form.Control name="valor" value={data.valor} 
@@ -259,6 +260,10 @@ const ReceberForm: React.FC = () => {
                 </Row>
                       
               </Card.Body>
+                <Card.Footer>
+                <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>
+                <Link to="/recebers" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                </Card.Footer>
           </Card>
       </Form>
     </div>

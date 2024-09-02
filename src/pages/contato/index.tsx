@@ -3,7 +3,7 @@
 import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import contatoService from "../../services/ContatoService";
-import { Form, Alert, Button, Col, Modal, Pagination, Row, Table, Spinner } from "react-bootstrap";
+import { Form, Alert, Button, Col, Modal, Pagination, Row, Table, Spinner, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faPencil, faPlus, faTrash, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { IContato as iData } from "../../interfaces/ContatoInterface";
@@ -92,11 +92,14 @@ const ContatoIndex: React.FC = () => {
             setShowModal(false);
             
         }).catch(err => {
-            if (err.response.status === 403) {
+            const error400 = [403,400]
+
+            if (error400.includes(err.response.status)) {
                 setShowModal(false);
                 setShowError(true)
                 setShowMessageError(err.response.data.detail)
             }
+           
         });
     }
 
@@ -109,37 +112,43 @@ const ContatoIndex: React.FC = () => {
     <Alert variant="danger" show={showError} onClose={() => setShowError(false)} dismissible>
         <span>{showMessageError}</span>
     </Alert>
-       
-    <Table striped bordered hover className="caption-top">
-        <caption style={{paddingTop: '0.5rem', paddingBottom: '0.5rem'}}>
-            <Row>
-                <Col sm="auto">
-                    <Form.Group className="mb-3" controlId="descricao">
-                        <Link to="/contato/create" className="btn btn-primary">
-                            <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> Adicionar
-                        </Link>
-                    </Form.Group>
-                </Col>
+    <Card>
+        <Card.Header>
+        <Card.Title className="text-center">Lista de Contatos</Card.Title>
+        </Card.Header>
+        <Card.Body>
+   
+            
+            <Table striped bordered hover className="caption-top">
+                <caption style={{padding: '0', margin: '0'}}>
+                    <Row>
+                        <Col sm="auto">
+                            <Form.Group className="mb-3  " controlId="descricao">
+                                <Link to="/contato/create" title="Adicionar" className="btn btn-primary rounded-pill">
+                                    <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon> 
+                                </Link>
+                            </Form.Group>
+                        </Col>
 
-                <Col sm="auto">
-                    <Form.Group className="mb-3" controlId="descricao">
-                        <div className="input-group mb-3">
-                            <input type="text" className="form-control" 
-                                onChange={(e) => setSearch(e.target.value)}
-                                value={search}
-                                placeholder="Procurar" 
-                                aria-label="Procurar" 
-                                aria-describedby="button-addon2"/>
-                        </div>
+                        <Col sm="4">
+                            <Form.Group className="mb-3" controlId="descricao">
+                                <div className="input-group mb-3">
+                                    <input type="search" className="form-control" 
+                                        onChange={(e) => setSearch(e.target.value)}
+                                        value={search}
+                                        placeholder="Procurar" 
+                                        aria-label="Procurar" 
+                                        aria-describedby="button-addon2"/>
+                                </div>
 
-                    </Form.Group>
-                </Col>
-                <Col>
-                    <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} 
-                        animation="border" role="status"/>
-                </Col>
-            </Row>
-        </caption>
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Spinner style={{ float: 'right' }} variant="success" hidden={!showSpinner} 
+                                animation="border" role="status"/>
+                        </Col>
+                    </Row>
+                </caption>
         <thead>
             <tr>
                 <th style={{ width: '5rem' }} className="text-center">Ações</th>
@@ -180,6 +189,10 @@ const ContatoIndex: React.FC = () => {
         <Pagination.Item active>{currentPage}</Pagination.Item>
         <Pagination.Next onClick={() => handlePageChange(nextPage)} disabled={!nextPage} />
     </Pagination>
+        </Card.Body>
+    </Card>
+       
+    
     
     <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

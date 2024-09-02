@@ -97,8 +97,8 @@ const FormConta: React.FC = () => {
             <Form onSubmit={handleSubmit} noValidate>
                 <Card>
                     <Card.Header>
-                        <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>
-                        <Link to="/contas" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                        <Card.Title className="text-center">Formulário de Conta</Card.Title>
+                       
                     </Card.Header>
 
                     <Card.Body>
@@ -179,6 +179,10 @@ const FormConta: React.FC = () => {
                                 </Col>
                             </Row>
                     </Card.Body>
+                    <Card.Footer>
+                    <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>
+                    <Link to="/contas" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                    </Card.Footer>
                 </Card>
             </Form>
         </div>

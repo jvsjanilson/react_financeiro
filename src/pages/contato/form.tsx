@@ -131,8 +131,8 @@ const ContatoForm: React.FC = () => {
             <Form onSubmit={handleSubmit} noValidate>
                 <Card>
                     <Card.Header>
-                        <Button variant={id ? 'success': 'primary'} type="submit"><FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }</Button>
-                        <Link to="/contatos" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                        <Card.Title className="text-center">Formulário de Contato</Card.Title>
+                        
                     </Card.Header>
 
                     <Card.Body>
@@ -297,6 +297,12 @@ const ContatoForm: React.FC = () => {
                                 </Col>
                             </Row>
                     </Card.Body>
+                    <Card.Footer>
+                        <Button variant={id ? 'success': 'primary'} type="submit">
+                            <FontAwesomeIcon icon={faSave} /> {id ? 'Salvar': 'Criar' }
+                        </Button>
+                        <Link to="/contatos" className="btn btn-secondary ms-1"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                    </Card.Footer>
                 </Card>
             </Form>
         </div>

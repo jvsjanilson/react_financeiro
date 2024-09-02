@@ -42,7 +42,7 @@ class ContatoService {
     }
     
     async delete(id) {
-        return api.delete(`/contato/${id}/`);
+        return api.delete(`/contatos/${id}/`);
     }
 }
 
