@@ -132,7 +132,6 @@ const ContatoForm: React.FC = () => {
                 <Card>
                     <Card.Header>
                         <Card.Title className="text-center">Formulário de Contato</Card.Title>
-                        
                     </Card.Header>
 
                     <Card.Body>
@@ -141,7 +140,7 @@ const ContatoForm: React.FC = () => {
                                 <Form.Group className="mb-3" controlId="nome">
                                     <Form.Label>Nome</Form.Label>
                                     <Form.Control name="nome" value={contato.nome} 
-                                        type="text" onChange={handleChange} maxLength={60} />
+                                        type="text" onChange={handleChange} maxLength={60} autoFocus />
                                     {errors.nome && (
                                         <ul className="errorfield">
                                             {errors.nome.map((error, index) => (

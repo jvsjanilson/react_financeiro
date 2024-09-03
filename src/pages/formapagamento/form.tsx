@@ -89,7 +89,7 @@ const FormPagto: React.FC = () => {
                                     <Form.Group className="mb-3" controlId="codigo">
                                         <Form.Label>Código</Form.Label>
                                         <Form.Control name="codigo" value={forma.codigo} 
-                                            type="text" onChange={handleChange} maxLength={3} />
+                                            type="text" onChange={handleChange} maxLength={3} autoFocus />
                                         {errors.codigo && (
                                             <ul className="errorfield">
                                                 {errors.codigo.map((error, index) => (

@@ -106,7 +106,8 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="descricao">
                                         <Form.Label>Descrição</Form.Label>
-                                        <Form.Control maxLength={60} name="descricao" value={conta.descricao} type="text" onChange={handleChange}  />
+                                        <Form.Control maxLength={60} name="descricao" value={conta.descricao} 
+                                            type="text" onChange={handleChange} autoFocus />
 
                                         {errors.descricao  && (
                                             <ul className="errorfield">
@@ -120,7 +121,8 @@ const FormConta: React.FC = () => {
                                 <Col md>
                                     <Form.Group className="mb-3" controlId="numero_conta">
                                         <Form.Label>Número Conta</Form.Label>
-                                        <Form.Control maxLength={10} name="numero_conta" value={conta.numero_conta} type="text" onChange={handleChange} />
+                                        <Form.Control maxLength={10} name="numero_conta" value={conta.numero_conta} 
+                                            type="text" onChange={handleChange} />
                                         {errors.numero_conta && (
                                             <ul className="errorfield">
                                                 {errors.numero_conta.map((error, index) => (
