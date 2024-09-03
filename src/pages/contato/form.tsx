@@ -136,166 +136,214 @@ const ContatoForm: React.FC = () => {
                     </Card.Header>
 
                     <Card.Body>
-                            <Row>
-                                <Col md>
-                                    <Form.Group className="mb-3" controlId="nome">
-                                        <Form.Label>Nome</Form.Label>
-                                        <Form.Control name="nome" value={contato.nome} 
-                                            type="text" onChange={handleChange} maxLength={60} />
-                                        {errors.nome && (
-                                            <ul className="errorfield">
-                                                {errors.nome.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={2}>
-                                    <Form.Group className="mb-3" controlId="cpf_cnpj">
-                                        <Form.Label>CPF/CNPJ</Form.Label>
-                                        <Form.Control name="cpf_cnpj" value={contato.cpf_cnpj} 
-                                            type="text" onChange={handleChange} maxLength={14} />
-
-                                        {errors.cpf_cnpj && (
-                                            <ul className="errorfield">
-                                                {errors.cpf_cnpj.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-
-                            <Row>
-                                <Col md={4}>
-                                    <Form.Group className="mb-3" controlId="endereco">
-                                        <Form.Label>Endereço</Form.Label>
-                                        <Form.Control name="endereco" value={contato.endereco} 
-                                            type="text" onChange={handleChange} maxLength={60} />
-                                        {errors.endereco && (
-                                            <ul className="errorfield">
-                                                {errors.endereco.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={2}>
-                                    <Form.Group className="mb-3" controlId="numero">
-                                        <Form.Label>Número</Form.Label>
-                                        <Form.Control name="numero" value={contato.numero} 
-                                            type="text" onChange={handleChange} maxLength={10} />
-
-                                        {errors.numero && (
-                                            <ul className="errorfield">
-                                                {errors.numero.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={2}>
-                                    <Form.Group className="mb-3" controlId="cep">
-                                        <Form.Label>CEP</Form.Label>
-                                        <Form.Control name="cep" value={contato.cep} 
-                                            type="text" onChange={handleChange} maxLength={8} />
-
-                                        {errors.cep && (
-                                            <ul className="errorfield">
-                                                {errors.cep.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={4}>
-                                    <Form.Group className="mb-3" controlId="complemento">
-                                        <Form.Label>Complemento</Form.Label>
-                                        <Form.Control name="complemento" value={contato.complemento} 
-                                            type="text" onChange={handleChange} maxLength={60} />
-                                        {errors.complemento && (
-                                            <ul className="errorfield">
-                                                {errors.endereco.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col md>
-                                    <Form.Group className="mb-3" controlId="bairro">
-                                        <Form.Label>Bairro</Form.Label>
-                                        <Form.Control name="bairro" value={contato.bairro} 
-                                            type="text" onChange={handleChange} maxLength={60} />
-                                        {errors.bairro && (
-                                            <ul className="errorfield">
-                                                {errors.bairro.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={4}>
-                                    <Form.Group className="mb-3" controlId="cidade">
-                                        <Form.Label>Cidade</Form.Label>
-                                        <Form.Control name="cidade" value={contato.cidade} 
-                                            type="text" onChange={handleChange} maxLength={60} />
-                                        {errors.cidade && (
-                                            <ul className="errorfield">
-                                                {errors.cidade.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
-
-                                <Col md={2}>
-                                    <Form.Group className="mb-3" controlId="estado">
-                                        <Form.Label>Estado</Form.Label>
-                                        <Form.Select name="estado" value={contato.estado}
-                                            onChange={handleChange}>
-                                            <option value="">Selecione...</option>
-                                            {estados.map((estado) => (
-                                                <option key={estado.id} value={estado.id}>{estado.nome}</option>
+                        <Row>
+                            <Col md>
+                                <Form.Group className="mb-3" controlId="nome">
+                                    <Form.Label>Nome</Form.Label>
+                                    <Form.Control name="nome" value={contato.nome} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.nome && (
+                                        <ul className="errorfield">
+                                            {errors.nome.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
                                             ))}
-                                        </Form.Select>
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
 
-                                        {errors.estado && (
-                                            <ul className="errorfield">
-                                                {errors.estado.map((error, index) => (
-                                                    <li key={index} className="text-danger">{error}</li>
-                                                ))}
-                                            </ul>
-                                        )}
-                                    </Form.Group>
-                                </Col>
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="cpf_cnpj">
+                                    <Form.Label>CPF/CNPJ</Form.Label>
+                                    <Form.Control name="cpf_cnpj" value={contato.cpf_cnpj} 
+                                        type="text" onChange={handleChange} maxLength={14} />
 
-                            </Row>
+                                    {errors.cpf_cnpj && (
+                                        <ul className="errorfield">
+                                            {errors.cpf_cnpj.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+                        </Row>
 
-                            <Row>
-                                <Col md>
-                                    <Form.Group className="mb-3" controlId="ativo">
-                                        <Form.Check type="checkbox" 
-                                            name="ativo" 
-                                            label="Ativo?" checked={contato.ativo} 
-                                            onChange={(e) => setContato({...contato, ativo: e.target.checked})} />
-                                    </Form.Group>
-                                </Col>
-                            </Row>
+                        <Row>
+                            <Col md={4}>
+                                <Form.Group className="mb-3" controlId="endereco">
+                                    <Form.Label>Endereço</Form.Label>
+                                    <Form.Control name="endereco" value={contato.endereco} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.endereco && (
+                                        <ul className="errorfield">
+                                            {errors.endereco.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="numero">
+                                    <Form.Label>Número</Form.Label>
+                                    <Form.Control name="numero" value={contato.numero} 
+                                        type="text" onChange={handleChange} maxLength={10} />
+
+                                    {errors.numero && (
+                                        <ul className="errorfield">
+                                            {errors.numero.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="cep">
+                                    <Form.Label>CEP</Form.Label>
+                                    <Form.Control name="cep" value={contato.cep} 
+                                        type="text" onChange={handleChange} maxLength={8} />
+
+                                    {errors.cep && (
+                                        <ul className="errorfield">
+                                            {errors.cep.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md={4}>
+                                <Form.Group className="mb-3" controlId="complemento">
+                                    <Form.Label>Complemento</Form.Label>
+                                    <Form.Control name="complemento" value={contato.complemento} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.complemento && (
+                                        <ul className="errorfield">
+                                            {errors.endereco.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md>
+                                <Form.Group className="mb-3" controlId="bairro">
+                                    <Form.Label>Bairro</Form.Label>
+                                    <Form.Control name="bairro" value={contato.bairro} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.bairro && (
+                                        <ul className="errorfield">
+                                            {errors.bairro.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md={4}>
+                                <Form.Group className="mb-3" controlId="cidade">
+                                    <Form.Label>Cidade</Form.Label>
+                                    <Form.Control name="cidade" value={contato.cidade} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.cidade && (
+                                        <ul className="errorfield">
+                                            {errors.cidade.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="estado">
+                                    <Form.Label>Estado</Form.Label>
+                                    <Form.Select name="estado" value={contato.estado}
+                                        onChange={handleChange}>
+                                        <option value="">Selecione...</option>
+                                        {estados.map((estado) => (
+                                            <option key={estado.id} value={estado.id}>{estado.nome}</option>
+                                        ))}
+                                    </Form.Select>
+
+                                    {errors.estado && (
+                                        <ul className="errorfield">
+                                            {errors.estado.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                        </Row>
+
+                       
+
+                        <Row>
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="celular">
+                                    <Form.Label>Celular</Form.Label>
+                                    <Form.Control name="celular" value={contato.celular} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.celular && (
+                                        <ul className="errorfield">
+                                            {errors.celular.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+                            <Col md={2}>
+                                <Form.Group className="mb-3" controlId="telefone">
+                                    <Form.Label>Telefone</Form.Label>
+                                    <Form.Control name="telefone" value={contato.telefone} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.telefone && (
+                                        <ul className="errorfield">
+                                            {errors.telefone.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+
+                            <Col md>
+                                <Form.Group className="mb-3" controlId="email">
+                                    <Form.Label>E-mail</Form.Label>
+                                    <Form.Control name="email" value={contato.email} 
+                                        type="text" onChange={handleChange} maxLength={60} />
+                                    {errors.email && (
+                                        <ul className="errorfield">
+                                            {errors.email.map((error, index) => (
+                                                <li key={index} className="text-danger">{error}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col md>
+                                <Form.Group className="mb-3" controlId="ativo">
+                                    <Form.Check type="checkbox" 
+                                        name="ativo" 
+                                        label="Ativo?" checked={contato.ativo} 
+                                        onChange={(e) => setContato({...contato, ativo: e.target.checked})} />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+
                     </Card.Body>
                     <Card.Footer>
                         <Button variant={id ? 'success': 'primary'} type="submit">
