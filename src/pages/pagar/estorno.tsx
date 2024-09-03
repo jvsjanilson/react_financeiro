@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Card, Form } from "react-bootstrap";
-import receberService from "../../services/ReceberService";
+import pagarService from "../../services/PagarService";
 import { faArrowLeft, faUndo } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -13,7 +13,7 @@ const initial = {
 }
 
 
-const FormEstorno: React.FC = () => {
+const PagarEstorno: React.FC = () => {
     const navigate = useNavigate();
     const { id } = useParams<{id: string}>();
     const [data, setData] = useState(initial);
@@ -21,9 +21,9 @@ const FormEstorno: React.FC = () => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
-        receberService.estornar(id).then(response => {
+        pagarService.estornar(id).then(response => {
             console.log(response)
-            navigate('/recebers')
+            navigate('/pagars')
 
         }).catch(err => {
             console.log(err)
@@ -31,7 +31,7 @@ const FormEstorno: React.FC = () => {
     }
 
     useEffect(() => {
-        receberService.get(id).then(response => {
+      pagarService.get(id).then(response => {
             setData({
                 documento: response.documento,
                 valor: response.valor,
@@ -45,9 +45,9 @@ const FormEstorno: React.FC = () => {
     return (
         <div className="container d-flex justify-content-center mt-4">
             <Form onSubmit={handleSubmit}>
-            <Card >
+            <Card>
                     <Card.Header>
-                        <Card.Title className="text-center">Estorno de título a receber</Card.Title>
+                        <Card.Title className="text-center">Estorno de título a pagar</Card.Title>
                     </Card.Header>
                     <Card.Body>
                         <div className="row">
@@ -85,7 +85,7 @@ const FormEstorno: React.FC = () => {
                     </Card.Body>
                     <Card.Footer>
                         <button type="submit" className="btn btn-danger me-2"><FontAwesomeIcon icon={faUndo}/> Estornar</button>
-                        <Link to="/recebers" className="btn btn-secondary"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
+                        <Link to="/pagars" className="btn btn-secondary"> <FontAwesomeIcon icon={faArrowLeft} /> Voltar</Link>
                     </Card.Footer>
                 </Card>
             </Form>
@@ -94,4 +94,4 @@ const FormEstorno: React.FC = () => {
 }
 
 
-export default FormEstorno;
+export default PagarEstorno;

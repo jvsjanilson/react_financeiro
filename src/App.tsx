@@ -16,6 +16,11 @@ import ReceberIndex from "./pages/receber";
 import ReceberForm from "./pages/receber/form";
 import FormBaixa from "./pages/receber/baixa";
 import FormEstorno from "./pages/receber/estorno";
+import PagarIndex from "./pages/pagar";
+import PagarForm from "./pages/pagar/form";
+import PagarBaixa from "./pages/pagar/baixa";
+import PagarEstorno from "./pages/pagar/estorno";
+
 
 
 const App: React.FC = () => {
@@ -114,6 +119,37 @@ const App: React.FC = () => {
               <Route path="/receber/estornar/:id" element={
                   <Layout>
                     <FormEstorno />
+                  </Layout>
+                } />
+
+
+            <Route path="/pagars" element={
+                  <Layout>
+                    <PagarIndex />
+                  </Layout>
+                } />
+
+              <Route path="/pagar/:id" element={
+                  <Layout>
+                    <PagarForm />
+                  </Layout>
+                } />
+
+              <Route path="/pagar/create" element={
+                  <Layout>
+                    <PagarForm />
+                  </Layout>
+                } />
+
+              <Route path="/pagar/baixar/:id" element={
+                  <Layout>
+                    <PagarBaixa />
+                  </Layout>
+                } />
+
+              <Route path="/pagar/estornar/:id" element={
+                  <Layout>
+                    <PagarEstorno />
                   </Layout>
                 } />
 

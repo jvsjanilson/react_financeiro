@@ -26,7 +26,7 @@ const NavigationBar: React.FC = () => {
 
                 <NavDropdown title="Finaneiro" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/recebers"><FontAwesomeIcon className="text-success" icon={faMoneyCheck} /> Contas a receber</NavDropdown.Item>
-                  <NavDropdown.Item as={Link} to="/contapagar"><FontAwesomeIcon className="text-danger" icon={faMoneyBills} /> Contas a pagar</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/pagars"><FontAwesomeIcon className="text-danger" icon={faMoneyBills} /> Contas a pagar</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
 

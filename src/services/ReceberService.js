@@ -12,7 +12,6 @@ class ReceberService {
         }
     
         return api.get(`/recebers/${query}`).then((response) => {
-                console.log(response.data);
                 return response.data;
             }
         );

@@ -3,7 +3,7 @@ import { Alert, Button, Col, Modal, Row, Spinner, Table, Form, Pagination, Card 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlus, faTrash, faPencil, faUndo, faMoneyBill } from "@fortawesome/free-solid-svg-icons"
 import { Link } from "react-router-dom";
-import receberService from "../../services/ReceberService";
+import pagarService from "../../services/PagarService";
 import { iReceber as iData } from "../../interfaces/ReceberInterface";
 import { formatDate, formatMoeda } from "../../utils/utils";
 
@@ -25,7 +25,7 @@ const initial  = {
     formapagamento_descricao: "",
 }
 
-const ReceberIndex: React.FC = () => {
+const PagarIndex: React.FC = () => {
 
     const [datas, setDatas] = useState<iData[]>([]);
     const [showModal, setShowModal] = useState(false); 
@@ -51,7 +51,7 @@ const ReceberIndex: React.FC = () => {
 
     const searchFilter = (page: string | null = null) => {
         setShowSpinner(true);
-        receberService.getAll(search, page).then( response => {
+        pagarService.getAll(search, page).then( response => {
             setDatas(response.results);
             changePage(response, page);
             setShowSpinner(false);
@@ -82,7 +82,7 @@ const ReceberIndex: React.FC = () => {
 
     const handleDelete = (id: number) => {
          
-        receberService.delete(id).then( data => {
+        pagarService.delete(id).then( data => {
              setDatas(datas.filter( data => data.id !== id));
             setShowModal(false);
             
@@ -107,7 +107,7 @@ const ReceberIndex: React.FC = () => {
             </Alert>
             <Card>
                 <Card.Header>
-                    <Card.Title className="text-center">Lista de Contas a receber</Card.Title>
+                    <Card.Title className="text-center">Lista de Contas a pagar</Card.Title>
                 </Card.Header>
                 <Card.Body>
                     <Table striped bordered hover className="caption-top">
@@ -115,7 +115,7 @@ const ReceberIndex: React.FC = () => {
                             <Row>
                                 <Col sm="auto">
                                     <Form.Group className="mb-3" controlId="descricao">
-                                        <Link to="/receber/create" className="btn btn-primary  rounded-pill">
+                                        <Link to="/pagar/create" className="btn btn-primary  rounded-pill">
                                             <FontAwesomeIcon icon={faPlus} ></FontAwesomeIcon>
                                         </Link>
                                     </Form.Group>
@@ -144,7 +144,7 @@ const ReceberIndex: React.FC = () => {
                             <tr>
                                 <th style={{ width: '6rem' }} className="text-center">Ações</th>
                                 <th style={{ width: '10rem' }}>Documento</th>
-                                <th>Nome Cliente</th>
+                                <th>Nome Fornecedor</th>
                                 <th>Forma Pagto</th>
                                 <th>Data Emissão</th>
                                 <th>Data Vencimento</th>
@@ -161,7 +161,7 @@ const ReceberIndex: React.FC = () => {
                                         {data.status === "A" && (
                                             
                                         <>
-                                            <Link className="text-primary" to={`/receber/${data.id}`}>
+                                            <Link className="text-primary" to={`/pagar/${data.id}`}>
                                                 <FontAwesomeIcon icon={faPencil} />
                                             </Link>
                                             <button type="button" onClick={() => handleOpenModal(data)} 
@@ -170,7 +170,7 @@ const ReceberIndex: React.FC = () => {
                                                     <FontAwesomeIcon icon={faTrash}/>
                                             </button>
 
-                                            <Link className="text-success ms-2" to={`/receber/baixar/${data.id}`}>
+                                            <Link className="text-success ms-2" to={`/pagar/baixar/${data.id}`}>
                                                 <FontAwesomeIcon icon={faMoneyBill} />
                                             </Link>
                                         </>
@@ -178,7 +178,7 @@ const ReceberIndex: React.FC = () => {
                                         )}
                                         {data.status === "P" && (
                                             <>
-                                                <Link className="text-primary" to={`/receber/estornar/${data.id}`}>
+                                                <Link className="text-primary" to={`/pagar/estornar/${data.id}`}>
                                                     <FontAwesomeIcon icon={faUndo} />
                                                 </Link>
                                             </>
@@ -232,4 +232,4 @@ const ReceberIndex: React.FC = () => {
   );
 };
 
-export default ReceberIndex;
+export default PagarIndex;
