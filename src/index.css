@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.errorfield {
+  color: #dc3545;
+  font-size: 80%;
+  font-weight: bolder;
+  list-style: none;
+  padding: 1px;
+}
