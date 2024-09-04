@@ -27,7 +27,10 @@ const Login: React.FC = () => {
                             <Form onSubmit={handleLogin}>
                                 <Form.Group className="mb-3" controlId="usernameid">
                                     <Form.Label>Usuário:</Form.Label>
-                                    <Form.Control type="text" placeholder="Usuário" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                    <Form.Control type="text" placeholder="Usuário" 
+                                        value={username} onChange={(e) => setUsername(e.target.value)}
+                                        autoFocus
+                                    />
                                 </Form.Group>
                                 <Form.Group className="mb-3" controlId="passwordid">
                                     <Form.Label>Senha:</Form.Label>
