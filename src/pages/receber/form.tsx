@@ -114,9 +114,17 @@ const ReceberForm: React.FC = () => {
       receberService.create(data).then( data => {
             navigate('/recebers')
         }).catch(err => {
+            console.log(err);
             if (err.response.status === 400) {
                 setErrors(err.response.data);
-            } else {
+
+            } 
+            else if (err.response.status === 403) {
+                setShowError(true);
+                setShowMessageError(err.response.data.detail);
+            }
+            
+            else {
                 setShowError(true);
                 setShowMessageError('Erro desconhecido');
             }
