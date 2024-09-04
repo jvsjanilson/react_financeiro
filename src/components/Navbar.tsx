@@ -3,7 +3,7 @@ import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faAddressBook, faBuildingColumns, faCreditCard, faMoneyBills, faMoneyCheck, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faAddressBook, faBuildingColumns, faCreditCard, faMoneyBills, faMoneyBillTransfer, faMoneyCheck, faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
 
 const NavigationBar: React.FC = () => {
@@ -27,6 +27,7 @@ const NavigationBar: React.FC = () => {
                 <NavDropdown title="Finaneiro" id="basic-nav-dropdown">
                   <NavDropdown.Item as={Link} to="/recebers"><FontAwesomeIcon className="text-success" icon={faMoneyCheck} /> Contas a receber</NavDropdown.Item>
                   <NavDropdown.Item as={Link} to="/pagars"><FontAwesomeIcon className="text-danger" icon={faMoneyBills} /> Contas a pagar</NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/fluxo"><FontAwesomeIcon className="text-primary" icon={faMoneyBillTransfer} /> Fluxo de Caixa</NavDropdown.Item>
                 </NavDropdown>
               </Nav>
 

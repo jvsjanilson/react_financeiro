@@ -20,6 +20,7 @@ import PagarIndex from "./pages/pagar";
 import PagarForm from "./pages/pagar/form";
 import PagarBaixa from "./pages/pagar/baixa";
 import PagarEstorno from "./pages/pagar/estorno";
+import FluxoIndex from "./pages/fluxo";
 
 
 
@@ -152,6 +153,13 @@ const App: React.FC = () => {
                     <PagarEstorno />
                   </Layout>
                 } />
+
+              <Route path="/fluxo" element={
+                  <Layout>
+                    <FluxoIndex />
+                  </Layout>
+                } />
+
 
 
 
