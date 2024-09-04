@@ -38,11 +38,11 @@ class ReceberService {
     }
 
     async baixar(id, body) {
-        return api.post(`/recebers/${id}/baixar-receber/`, body);
+        return api.post(`/recebers/${id}/baixar/`, body);
     }
 
     async estornar(id, body) {
-        return api.post(`/recebers/${id}/estornar-receber/`, body);
+        return api.post(`/recebers/${id}/estornar/`, body);
     }
 
 }
