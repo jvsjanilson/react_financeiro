@@ -50,6 +50,12 @@ const ContatoIndex: React.FC = () => {
             setShowSpinner(false);
             
         }).catch(err => {
+            
+            if (err.status === 403) {
+                setShowMessageError(err.response.data.detail);
+                setShowError(true) ;
+            }
+
             setShowSpinner(false);
         });
 
