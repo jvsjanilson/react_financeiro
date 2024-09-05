@@ -11,23 +11,20 @@ const api = axios.create({
     },
 });
 
-api.interceptors.request.use(async config => {
-    const token = localStorage.getItem('token');
+api.interceptors.request.use(
+    async config => {
+        const token = localStorage.getItem('token');
 
-    if (token) {
-        config.headers.Authorization = `Bearer ${JSON.parse(token).access}`;
+        if (token) {
+            config.headers.Authorization = `Bearer ${JSON.parse(token).access}`;
+        }
+        return config;
     }
-    
-    return config;
-}
 );
 
 api.interceptors.response.use(
-    response => {
-        return response;
-    },
+    response => response,
     async (error) => {
-        console.log(error);
         if (error.response.status === 401) {
             localStorage.removeItem('token');
             window.location.href = '/login';
