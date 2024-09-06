@@ -1,8 +1,9 @@
 import axios from "axios";
 
-const port = 8000;
+const port: number = 80;
 
-export const BASE_URL = `http://localhost:${port}/api/`;
+export const BASE_URL = `https://janilsonjvs.pythonanywhere.com${port !== 80 ? ':'+port.toString() : ''}/api/`;
+// export const BASE_URL = `http://localhost:${port}/api/`;
 
 const api = axios.create({
     baseURL: BASE_URL,
