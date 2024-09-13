@@ -1,5 +1,5 @@
 # Aplicativo para controle financeiro, contas a pagar e a receber
-Desenvolvido em React que consome uma api desenvolvida em Django com Django Rest Framework e autenticação com JWT.
+Desenvolvido em React que consome uma api desenvolvida em Django com autenticação JWT.
 
 ## Instalação
 
